@@ -1,2 +1,1 @@
-Hello world
-I can update it now yeah 
+Basic of git hub completed
