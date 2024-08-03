@@ -83,12 +83,9 @@ int main() {
   srand(time(0));
   gameRule();
   while (true) {
-    system("clear");
+    (void)system("clear");
     generateNumber();
     int isCorrect = 0, userGuess;
-    for (int i = 0; i < 4; i++)
-      cout << num[i];
-    cout << endl;
     while (isCorrect == 0) {
       cout << "Enter your guess : ";
       cin >> userGuess;
@@ -110,7 +107,7 @@ int main() {
     else if (choice == 'y')
       continue;
   }
-  system("clear");
+  (void)system("clear");
   cout << "Thanks for playing." << endl;
   return 0;
 }
