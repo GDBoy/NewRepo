@@ -297,13 +297,6 @@ void sendMoney() {
   }
 }
 
-void rset() {
-  for (int i = 0; i < name.size(); i++) {
-    ofstream fl(to_string(num[i]) + ".txt");
-    fl.close();
-  }
-}
-
 int main() {
   srand(time(0));
   fetchData();
@@ -313,7 +306,7 @@ int main() {
             "money\n5. Open account\n0. Exit.\n\nEnter your choice "
             "(1/2/3/4/5/0) : ";
     cin >> ch;
-    while (ch > 5 || ch < -1) {
+    while (ch > 5 || ch < 0) {
       cout << "Not clear...Re-enter : ";
       cin >> ch;
     }
@@ -337,8 +330,6 @@ int main() {
     case 0:
       cout << "\nThanks for using...";
       exit(0);
-    case -1:
-      rset();
     }
     cin.ignore();
     cout << "\n\nPress ENTER to continue...";
