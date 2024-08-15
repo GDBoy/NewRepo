@@ -13,16 +13,11 @@ vector<int> pin;
 vector<int> balance;
 
 void fetchData() {
-  ifstream fln("name.txt");
-  ifstream fla("add.txt");
-  ifstream flnum("num.txt");
-  ifstream flp("pin.txt");
-  ifstream flb("balance.txt");
-
-  if (!fln || !fla || !flnum || !flp || !flb) {
-    cerr << "Error opening one or more files." << endl;
-    return;
-  }
+  ifstream fln("./data/name.txt");
+  ifstream fla("./data/add.txt");
+  ifstream flnum("./data/num.txt");
+  ifstream flp("./data/pin.txt");
+  ifstream flb("./data/balance.txt");
 
   string line;
   while (getline(fln, line)) {
@@ -71,7 +66,7 @@ void isRegAcc(int accNum, int &in) {
 
 void transac(int accNum, int amnt, int sw, int racc = 0, string sname = " ",
              string rname = " ") {
-  ofstream fl(to_string(accNum) + ".txt", ios::app);
+  ofstream fl("./data/" + to_string(accNum) + ".txt", ios::app);
   switch (sw) {
   case 1:
     fl << "Amount " << amnt << " has been deposited" << endl;
@@ -83,7 +78,7 @@ void transac(int accNum, int amnt, int sw, int racc = 0, string sname = " ",
     fl << "Transferred amount " << amnt << " to   " << rname << " (" << racc
        << ")" << endl;
     ofstream fl2;
-    fl2.open(to_string(racc) + ".txt", ios::app);
+    fl2.open("./data/" + to_string(racc) + ".txt", ios::app);
     fl2 << "Received amount    " << amnt << " from " << sname << " (" << accNum
         << ")" << endl;
     fl2.close();
@@ -93,7 +88,7 @@ void transac(int accNum, int amnt, int sw, int racc = 0, string sname = " ",
 }
 
 void updateBal(int lineNumber, const string &newContent) {
-  ifstream inFile("balance.txt");
+  ifstream inFile("./data/balance.txt");
   if (!inFile) {
     cerr << "Unable to open file for reading.\n";
     return;
@@ -109,7 +104,7 @@ void updateBal(int lineNumber, const string &newContent) {
     return;
   }
   lines[lineNumber - 1] = newContent;
-  ofstream outFile("balance.txt");
+  ofstream outFile("./data/balance.txt");
   for(int i=0; i<lines.size(); i++) {
     outFile<<lines[i]<<endl;
   }
@@ -170,7 +165,7 @@ void withdraw() {
 }
 
 void prTransac(int accNum) {
-  ifstream fl(to_string(accNum) + ".txt");
+  ifstream fl("./data/" + to_string(accNum) + ".txt");
   string txt;
   while (getline(fl, txt)) {
     cout << endl << txt;
@@ -209,11 +204,11 @@ bool preNumCheck(int gnum) {
 }
 
 void saveNewUser(string hname, string hadd, int gnum, int npin, int amnt) {
-  ofstream fln("name.txt", ios::app);
-  ofstream fla("add.txt", ios::app);
-  ofstream flnum("num.txt", ios::app);
-  ofstream flp("pin.txt", ios::app);
-  ofstream flb("balance.txt", ios::app);
+  ofstream fln("./data/name.txt", ios::app);
+  ofstream fla("./data/add.txt", ios::app);
+  ofstream flnum("./data/num.txt", ios::app);
+  ofstream flp("./data/pin.txt", ios::app);
+  ofstream flb("./data/balance.txt", ios::app);
 
   if (!fln || !fla || !flnum || !flp || !flb) {
     cerr << "Error opening one or more files." << endl;
@@ -302,7 +297,7 @@ void sendMoney() {
 
 void rset() {
   for (int i = 0; i < name.size(); i++) {
-    ofstream fl(to_string(num[i]) + ".txt");
+    ofstream fl("./data/" + to_string(num[i]) + ".txt");
     fl.close();
   }
 }
